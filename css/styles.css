@@ -1,0 +1,28 @@
+/* Basics */
+
+@import url(basics/base.css);
+@import url(basics/helpers.css);
+@import url(basics/layout.css);
+
+/* Components */
+
+@import url(components/main-header.css);
+@import url(components/screen.css);
+@import url(components/menu-btn.css);
+@import url(components/menu-item.css);
+@import url(components/pagination.css);
+@import url(components/socials.css);
+@import url(components/footer.css);
+@import url(components/title.css);
+@import url(components/modal.css);
+@import url(components/meme-image.css);
+@import url(components/main-search.css);
+@import url(components/editor-interface.css);
+
+/* Setup */
+@import url(setup/vars.css);
+@import url(setup/typography.css);
+
+/* Media Queries */
+
+@import 'mq/mq.css';

@@ -1,0 +1,13 @@
+.main-header {
+  background-color: var(--clr1);
+  padding: 0;
+}
+
+.logo {
+  width: 30%;
+}
+
+.header-container {
+  background-color: var(--clr1);
+  width: 100%;
+}

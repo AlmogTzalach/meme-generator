@@ -1,0 +1,34 @@
+.flex {
+  display: flex;
+}
+
+.flex.align-center {
+  align-items: center;
+}
+
+.flex.space-between {
+  justify-content: space-between;
+}
+
+.clean-list {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.grid {
+  display: grid;
+}
+
+.show {
+  display: block;
+}
+
+.hide{
+  display: none;
+}

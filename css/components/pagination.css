@@ -1,0 +1,15 @@
+.next-btn,
+.prev-btn {
+  text-transform: uppercase;
+  background-color: var(--clr1);
+  color: var(--clr7);
+  padding: 1.875rem;
+  letter-spacing: 0.03rem;
+  border: none;
+  cursor: pointer;
+}
+
+.pagination {
+  border-left: 1px solid var(--clr9);
+  border-right: 1px solid var(--clr9);
+}

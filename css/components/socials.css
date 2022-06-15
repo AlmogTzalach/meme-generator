@@ -1,0 +1,33 @@
+/* Style all font awesome icons */
+.fa {
+  padding: 0.8rem;
+  font-size: 1rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  text-align: center;
+  text-decoration: none;
+  background-color: var(--clr11);
+  color: white;
+}
+
+/* Set a specific color for each brand */
+
+/* Facebook */
+.fa-facebook:hover {
+  background: #3b5998;
+}
+
+/* Twitter */
+.fa-twitter:hover {
+  background: #55acee;
+}
+
+/* Behance */
+.fa-behance:hover {
+  background: black;
+}
+
+/* Dribbble */
+.fa-dribbble:hover {
+  background: #ea4c89;
+}

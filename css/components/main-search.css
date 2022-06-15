@@ -1,0 +1,9 @@
+.search-container {
+  background-color: var(--clr2);
+}
+
+.main-search {
+  background-color: var(--clr2);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}

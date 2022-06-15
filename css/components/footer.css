@@ -1,0 +1,19 @@
+.footer-container {
+  background-color: var(--clr1);
+  width: 100%;
+}
+
+.main-footer {
+  flex-direction: column;
+  width: 100%;
+}
+
+.copyrights {
+  font-size: 0.8125rem;
+  margin-bottom: 2.375rem;
+  line-height: 1.25rem;
+}
+
+.socials-container {
+  margin-bottom: 4.5625rem;
+}
