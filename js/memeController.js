@@ -18,10 +18,14 @@ function getCanvas() {
   gCtx = gElCanvas.getContext('2d')
 }
 
+function clearCanvas() {
+  gCtx.clearRect(0, 0, 500, 500)
+}
+
 function renderMeme() {
   const meme = getMeme()
   const imgs = getImages()
-  gCtx.clearRect(0, 0, 500, 500)
+  // gCtx.clearRect(0, 0, 500, 500)
   const img = new Image()
   img.onload = () => {
     gCtx.drawImage(img, 0, 0)
@@ -89,35 +93,34 @@ function addTouchListeners() {
 }
 
 function onDown(ev) {
-    //Get the ev pos from mouse or touch
-    const pos = getEvPos(ev)
-    if (!isRectClicked(pos)) return
-    setRectDrag(true)
-    //Save the pos we start from 
-    gStartPos = pos
-    gElCanvas.style.cursor = 'grabbing'
-
+  //Get the ev pos from mouse or touch
+  const pos = getEvPos(ev)
+  if (!isRectClicked(pos)) return
+  setRectDrag(true)
+  //Save the pos we start from
+  gStartPos = pos
+  gElCanvas.style.cursor = 'grabbing'
 }
 
 function onMove(ev) {
-    const meme = getMeme()
-    const line = meme.lines[0]
-    if (line.isDrag) {
-        const pos = getEvPos(ev)
-        //Calc the delta , the diff we moved
-        const dx = pos.x - line.linePos.x
-        const dy = pos.y - line.linePos.y
-        moveRect(dx, dy)
-        //Save the last pos , we remember where we`ve been and move accordingly
-        gStartPos = pos
-        //The canvas is render again after every move
-        renderMeme()
-    }
+  const meme = getMeme()
+  const line = meme.lines[0]
+  if (line.isDrag) {
+    const pos = getEvPos(ev)
+    //Calc the delta , the diff we moved
+    const dx = pos.x - line.linePos.x
+    const dy = pos.y - line.linePos.y
+    moveRect(dx, dy)
+    //Save the last pos , we remember where we`ve been and move accordingly
+    gStartPos = pos
+    //The canvas is render again after every move
+    renderMeme()
+  }
 }
 
 function onUp() {
-    setRectDrag(false)
-    gElCanvas.style.cursor = 'grab'
+  setRectDrag(false)
+  gElCanvas.style.cursor = 'grab'
 }
 
 function resizeCanvas() {

@@ -76,6 +76,7 @@ function onMemeClicked(imgId) {
   setMeme(imgId)
   getCanvas()
   renderEditor()
+  clearCanvas()
   renderMeme()
   addListeners()
 }
