@@ -75,15 +75,26 @@ function clearCanvas() {
   gCtx.clearRect(0, 0, 500, 500)
 }
 
-//checkpoint!!!!!!!!!!!
-
 function renderMeme() {
   const meme = getMeme()
   const imgs = getImages()
   // gCtx.clearRect(0, 0, 500, 500)
   const img = new Image()
   img.onload = () => {
-    gCtx.drawImage(img, 0, 0)
+    if (document.body.clientWidth < 640) {
+      gElCanvas.width = 300
+      gElCanvas.height = (img.height * 300) / img.width
+    }
+    if (document.body.clientWidth > 840) {
+      gElCanvas.width = 400
+      gElCanvas.height = (img.height * 400) / img.width
+    }
+    if (document.body.clientWidth > 1100) {
+      gElCanvas.width = 500
+      gElCanvas.height = (img.height * 500) / img.width
+    }
+
+    gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
     meme.lines.forEach((line) => {
       const { x, y } = line.linePos
       gCtx.textAlign = line.align
@@ -108,40 +119,6 @@ function renderMeme() {
   })
   img.src = currImg.url
 }
-
-// function renderMeme() {
-//   const meme = getMeme()
-//   const imgs = getImages()
-//   // gCtx.clearRect(0, 0, 500, 500)
-//   const img = new Image()
-//   img.onload = () => {
-//     gCtx.drawImage(img, 0, 0)
-//     const line = meme.lines[meme.selectedLineIdx]
-//     const { x, y } = line.linePos
-//     gCtx.textAlign = line.align
-//     gCtx.font = line.size + 'px ' + line.font
-//     gCtx.fillStyle = line.color
-//     const txtWidth = gCtx.measureText(line.txt).width
-//     gCtx.fillText(line.txt, x, y)
-//     gCtx.strokeStyle = line.rectColor
-//     gCtx.strokeRect(
-//       x - txtWidth / 2 - 10,
-//       y - line.size,
-//       txtWidth + 20,
-//       line.size + 10
-//     )
-//     line.rectPos = {
-//       x: x - txtWidth / 2 - 10,
-//       y: y - line.size,
-//       w: txtWidth + 20,
-//       h: line.size + 10,
-//     }
-//   }
-//   const currImg = imgs.find((img) => {
-//     if (img.id === meme.selectedImgId) return img
-//   })
-//   img.src = currImg.url
-// }
 
 function renderRect() {
   const meme = getMeme()
@@ -174,7 +151,7 @@ function renderRect() {
 function addListeners() {
   addMouseListeners()
   addTouchListeners()
-  //Listen for resize ev
+  // Listen for resize ev
   // window.addEventListener('resize', () => {
   //   resizeCanvas()
   // })
