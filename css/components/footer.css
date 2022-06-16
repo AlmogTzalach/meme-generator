@@ -1,6 +1,7 @@
 .footer-container {
   background-color: var(--clr1);
   width: 100%;
+  padding: 1rem;
 }
 
 .main-footer {
@@ -8,10 +9,8 @@
   width: 100%;
 }
 
-.copyrights {
-  font-size: 0.8125rem;
-  margin-bottom: 2.375rem;
-  line-height: 1.25rem;
+.small {
+  text-align: center;
 }
 
 .socials-container {

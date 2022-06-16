@@ -8,7 +8,6 @@
     <title>MEMEGEN</title>
   </head>
   <body onload="onInit()">
-
     <div class="main-screen" onclick="toggleMenu()"></div>
 
     <section class="header-container">
@@ -17,16 +16,19 @@
           <img src="images/LOGO.png" />
         </div>
         <div class="dropdown">
-            <div class="menu-toggle" onclick="toggleMenu()">
-              <div class="bar1"></div>
-              <div class="bar2"></div>
-              <div class="bar3"></div>
-            </div>
-        <ul class="main-nav clean-list flex space-between">
-          <li class="menu-item">Gallery</li>
-          <li class="menu-item">Memes</li>
-          <li class="menu-item">About</li>
-        </ul>
+          <div class="menu-toggle" onclick="toggleMenu()">
+            <div class="bar1"></div>
+            <div class="bar2"></div>
+            <div class="bar3"></div>
+          </div>
+          <ul class="main-nav clean-list flex space-between">
+            <li class="menu-item" onclick="resetGallery('showGallery')">
+              Gallery
+            </li>
+            <li class="menu-item" onclick="resetGallery('showSaved')">Memes</li>
+            <li class="menu-item">About</li>
+          </ul>
+        </div>
       </header>
     </section>
 
@@ -42,62 +44,109 @@
     </section>
 
     <section class="main-content main-layout flex">
-
-    <div class="meme-editor flex space-between hide">
-        <div class="canvas-container">
-            <canvas width="500" height="500"></canvas>
+      <div class="meme-editor flex hide space-between">
+        <div class="canvas-container flex align-center">
+          <canvas width="500" height="500"></canvas>
         </div>
 
         <div class="editor-interface flex">
+          <div class="btns-container flex">
+            <input
+              type="text"
+              class="text-editor"
+              oninput="onTextTyped(this)"
+            />
+          </div>
+          <div class="btns-container flex align-center">
+            <button class="editor-btn" onclick="onChangeLine()">
+              <img src="images/icons/up-and-down-arrows.png" />
+            </button>
+            <button class="editor-btn" onclick="onAddLine()">
+              <img src="images/icons/add.png" />
+            </button>
+            <button class="editor-btn" onclick="onRemoveLine()">
+              <img src="images/icons/trash.png" />
+            </button>
+          </div>
 
-            <div class="btns-container flex">
-                <input type="text" class="text-editor">
-            </div>
-            <div class="btns-container flex align-center">
-                <button class="editor-btn"><img src="images/icons/up-and-down-arrows.png"></button>
-                <button class="editor-btn"><img src="images/icons/add.png"></button>
-                <button class="editor-btn"><img src="images/icons/trash.png"></button>
-            </div>
+          <div class="btns-container flex">
+            <button class="editor-btn" onclick="onIncFont()">
+              <img src="images/icons/increase font - icon.png" />
+            </button>
+            <button class="editor-btn" onclick="onDecFont()">
+              <img src="images/icons/decrease font - icon.png" />
+            </button>
+            <button class="editor-btn" onclick="onSetAlign('right')">
+              <img src="images/icons/align-to-left.png" />
+            </button>
+            <button class="editor-btn" onclick="onSetAlign('center')">
+              <img src="images/icons/center-text-alignment.png" />
+            </button>
+            <button class="editor-btn" onclick="onSetAlign('left')">
+              <img src="images/icons/align-to-right.png" />
+            </button>
+          </div>
 
-
-        <div class="btns-container flex">
-            <button class="editor-btn"><img src="images/icons/increase font - icon.png"></button>
-            <button class="editor-btn"><img src="images/icons/decrease font - icon.png"></button>
-            <button class="editor-btn"><img src="images/icons/align-to-left.png"></button>
-            <button class="editor-btn"><img src="images/icons/center-text-alignment.png"></button>
-            <button class="editor-btn"><img src="images/icons/align-to-right.png"></button>
-        </div>
-
-        <div class="btns-container flex">
-            <select name="font-select">
-                <option value="impact">Impact</option>
-                <option value="arial">Arial</option>
+          <div class="btns-container flex">
+            <select name="font-select" onchange="onSelectFont(this.value)">
+              <option value="Impact">Impact</option>
+              <option value="Arial">Arial</option>
             </select>
-            <button class="editor-btn">A</button>
-            <button class="editor-btn"><img src="images/icons/paint-board-and-brush.png"></button>
-        </div>
-            
-        </div>
 
-    </div>
+            <div class="editor-btn flex space-between align-center">
+              <label for="stroke-color"><img src="images/icons/A.png" /></label>
+              <input
+                type="color"
+                name="stroke-color"
+                onchange="onSelectStroke(this.value)"
+              />
+            </div>
+
+            <div class="editor-btn flex space-between align-center">
+              <label for="fill-color"
+                ><img src="images/icons/paint-board-and-brush.png"
+              /></label>
+              <input
+                type="color"
+                name="fill-color"
+                onchange="onSelectFill(this.value)"
+              />
+            </div>
+          </div>
+
+          <div class="btns-container flex space-between">
+            <button class="editor-btn" onclick="onSaveMeme()">Save</button>
+            <a
+              href="#"
+              class="editor-btn"
+              onclick="onDownloadMeme(this)"
+              download="my-meme.jpg"
+              >Download</a
+            >
+            <button class="editor-btn" onclick="onShareMeme()">Share</button>
+          </div>
+        </div>
+      </div>
 
       <div class="grid-container grid gallery"></div>
     </section>
 
     <section class="footer-container">
-      <footer class="main-footer main-layout">footer</footer>
+      <footer class="main-footer main-layout flex align-center">
+        <div class="logo flex align-center">
+          <img src="images/LOGO.png" />
+        </div>
+        <span class="small">
+          &copy; Made by Almog Tzalach for
+          <a href="https://www.coding-academy.org/">Coding Academy</a></span
+        >
+      </footer>
     </section>
 
+    <script src="js/storageService.js"></script>
+    <script src="js/memeService.js"></script>
     <script src="js/galleryController.js"></script>
     <script src="js/memeController.js"></script>
-    <script src="js/memeService.js"></script>
     <script src="js/main.js"></script>
-    <script>
-        function toggleMenu() {
-          document.querySelector('.main-nav').classList.toggle('show')
-          document.querySelector('.menu-toggle').classList.toggle('change')
-          document.body.classList.toggle('screen-open')
-        }
-      </script>
   </body>
 </html>

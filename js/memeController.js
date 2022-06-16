@@ -8,9 +8,62 @@ var gStartPos
 
 const gTouchEvs = ['touchstart', 'touchmove', 'touchend']
 
-function renderEditor() {
-  const elEditor = document.querySelector('.meme-editor')
-  elEditor.classList.remove('hide')
+function onTextTyped(elInput) {
+  setLineText(elInput)
+  renderMeme()
+}
+
+function onAddLine() {
+  addNewLine()
+  renderMeme()
+}
+
+function onChangeLine() {
+  changeLineIdx()
+  renderMeme()
+}
+
+function onRemoveLine() {
+  removeLine()
+  renderMeme()
+}
+
+function onIncFont() {
+  incFontSize()
+  renderMeme()
+}
+
+function onDecFont() {
+  decFontSize()
+  renderMeme()
+}
+
+function onSelectFont(font) {
+  setFont(font)
+  renderMeme()
+}
+
+function onSetAlign(align) {
+  setAlign(align)
+  renderMeme()
+}
+
+function onSelectStroke(color) {
+  setStrokeClr(color)
+  renderMeme()
+}
+
+function onSelectFill(color) {
+  setFillClr(color)
+  renderMeme()
+}
+
+function onSaveMeme() {
+  saveMeme()
+}
+
+function onDownloadMeme(elLink) {
+  downloadMeme(elLink)
 }
 
 function getCanvas() {
@@ -22,6 +75,8 @@ function clearCanvas() {
   gCtx.clearRect(0, 0, 500, 500)
 }
 
+//checkpoint!!!!!!!!!!!
+
 function renderMeme() {
   const meme = getMeme()
   const imgs = getImages()
@@ -29,30 +84,76 @@ function renderMeme() {
   const img = new Image()
   img.onload = () => {
     gCtx.drawImage(img, 0, 0)
-    const line = meme.lines[0]
-    const { x, y } = line.linePos
-    gCtx.textAlign = line.align
-    gCtx.font = line.size + 'px ' + line.font
-    gCtx.fillStyle = line.color
-    const txtWidth = gCtx.measureText(line.txt).width
-    gCtx.fillText(line.txt, x, y)
-    gCtx.strokeRect(
-      x - txtWidth / 2 - 10,
-      y - line.size,
-      txtWidth + 20,
-      line.size + 10
-    )
-    line.rectPos = {
-      x: x - txtWidth / 2 - 10,
-      y: y - line.size,
-      w: txtWidth + 20,
-      h: line.size + 10,
-    }
+    meme.lines.forEach((line) => {
+      const { x, y } = line.linePos
+      gCtx.textAlign = line.align
+      gCtx.font = line.size + 'px ' + line.font
+      gCtx.fillStyle = line.color
+      const txtWidth = gCtx.measureText(line.txt).width
+      gCtx.strokeStyle = line.strokeClr
+      gCtx.strokeText(line.txt, x, y)
+      gCtx.fillText(line.txt, x, y)
+      gCtx.strokeStyle = line.rectColor
+      gCtx.strokeRect(x - txtWidth, y - line.size, txtWidth * 2, line.size + 10)
+      line.rectPos = {
+        x: x - txtWidth,
+        y: y - line.size,
+        w: txtWidth * 2,
+        h: line.size + 10,
+      }
+    })
   }
   const currImg = imgs.find((img) => {
     if (img.id === meme.selectedImgId) return img
   })
   img.src = currImg.url
+}
+
+// function renderMeme() {
+//   const meme = getMeme()
+//   const imgs = getImages()
+//   // gCtx.clearRect(0, 0, 500, 500)
+//   const img = new Image()
+//   img.onload = () => {
+//     gCtx.drawImage(img, 0, 0)
+//     const line = meme.lines[meme.selectedLineIdx]
+//     const { x, y } = line.linePos
+//     gCtx.textAlign = line.align
+//     gCtx.font = line.size + 'px ' + line.font
+//     gCtx.fillStyle = line.color
+//     const txtWidth = gCtx.measureText(line.txt).width
+//     gCtx.fillText(line.txt, x, y)
+//     gCtx.strokeStyle = line.rectColor
+//     gCtx.strokeRect(
+//       x - txtWidth / 2 - 10,
+//       y - line.size,
+//       txtWidth + 20,
+//       line.size + 10
+//     )
+//     line.rectPos = {
+//       x: x - txtWidth / 2 - 10,
+//       y: y - line.size,
+//       w: txtWidth + 20,
+//       h: line.size + 10,
+//     }
+//   }
+//   const currImg = imgs.find((img) => {
+//     if (img.id === meme.selectedImgId) return img
+//   })
+//   img.src = currImg.url
+// }
+
+function renderRect() {
+  const meme = getMeme()
+  const imgs = getImages()
+  const line = meme.lines[meme.selectedLineIdx]
+  const currImg = imgs.find((img) => {
+    if (img.id === meme.selectedImgId) return img
+  })
+
+  const { x, y, w, h } = line.rectPos
+  gCtx.strokeStyle = line.rectColor
+  gCtx.strokeRect(x, y, w, h)
 }
 
 // function renderMeme(elImg) {
@@ -74,10 +175,9 @@ function addListeners() {
   addMouseListeners()
   addTouchListeners()
   //Listen for resize ev
-  window.addEventListener('resize', () => {
-    resizeCanvas()
-    renderCanvas()
-  })
+  // window.addEventListener('resize', () => {
+  //   resizeCanvas()
+  // })
 }
 
 function addMouseListeners() {
@@ -96,6 +196,7 @@ function onDown(ev) {
   //Get the ev pos from mouse or touch
   const pos = getEvPos(ev)
   if (!isRectClicked(pos)) return
+  renderRect()
   setRectDrag(true)
   //Save the pos we start from
   gStartPos = pos
@@ -104,7 +205,7 @@ function onDown(ev) {
 
 function onMove(ev) {
   const meme = getMeme()
-  const line = meme.lines[0]
+  const line = meme.lines[meme.selectedLineIdx]
   if (line.isDrag) {
     const pos = getEvPos(ev)
     //Calc the delta , the diff we moved
@@ -114,20 +215,22 @@ function onMove(ev) {
     //Save the last pos , we remember where we`ve been and move accordingly
     gStartPos = pos
     //The canvas is render again after every move
+    renderRect()
     renderMeme()
   }
 }
 
 function onUp() {
   setRectDrag(false)
+  renderRect()
   gElCanvas.style.cursor = 'grab'
 }
 
-function resizeCanvas() {
-  const elContainer = document.querySelector('.canvas-container')
-  gElCanvas.width = elContainer.offsetWidth
-  gElCanvas.height = elContainer.offsetHeight
-}
+// function resizeCanvas() {
+//   const elContainer = document.querySelector('.canvas-container')
+//   gElCanvas.width = elContainer.offsetWidth
+//   gElCanvas.height = elContainer.offsetHeight
+// }
 
 function getEvPos(ev) {
   //Gets the offset pos , the default pos

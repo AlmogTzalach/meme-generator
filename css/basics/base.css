@@ -30,3 +30,7 @@ a {
 img {
   width: 100%;
 }
+
+canvas:hover {
+cursor: grab;
+}

@@ -23,3 +23,7 @@
   flex-direction: column;
   margin-bottom: 2rem;
 }
+
+.meme-editor {
+  flex-direction: column;
+}

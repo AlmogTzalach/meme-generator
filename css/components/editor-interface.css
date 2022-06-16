@@ -1,25 +1,27 @@
 .editor-interface {
-    flex-direction: column;
+  flex-direction: column;
 }
 
 .text-editor {
-    border: 0px solid;
-    border-radius: 6px;
+  border: 0px solid;
+  border-radius: 6px;
+  padding: 1.2rem;
 }
 
 .editor-btn {
-    width: 1.875rem;
-    height: 1.875rem;
-    border: none;
-    border-radius: 6px;
-    background-color: #fff;
+  padding: 0.5rem;
+  border: none;
+  border-radius: 6px;
+  background-color: #fff;
+  margin-inline-end: 0.3rem;
 }
 
 .text-editor {
-    width: 100%;
-    margin-bottom: 0.28125rem;
+  width: 100%;
+  margin-bottom: 0.28125rem;
 }
 
 .btns-container {
-    justify-content: center;
+  justify-content: center;
+  margin-bottom: 0.3rem;
 }

@@ -72,15 +72,62 @@ function renderGallery() {
   elGallery.innerHTML = strHTML
 }
 
+function renderSavedMemes() {
+  const elGallery = document.querySelector('.gallery')
+  const savedMemes = getSavedMemes()
+  if (savedMemes.length === 0) {
+    elGallery.innerText = 'No Saved Memes'
+    return
+  }
+  let strHTML = ''
+  savedMemes.forEach(
+    (meme) =>
+      (strHTML += `<div class="meme-image">
+                         <img onclick="onMemeClicked(${meme.selectedImgId})" src="${meme.url}"/>
+                    </div>`)
+  )
+
+  elGallery.innerHTML = strHTML
+}
+
 function onMemeClicked(imgId) {
   setMeme(imgId)
   getCanvas()
-  renderEditor()
+  showEditor()
   clearCanvas()
   renderMeme()
+  hideGallery()
   addListeners()
 }
 
 function getImages() {
-    return gImgs
+  return gImgs
+}
+
+function hideGallery() {
+  const elGallery = document.querySelector('.gallery')
+  elGallery.classList.add('hide')
+}
+
+function showGallery() {
+  const elGallery = document.querySelector('.gallery')
+  elGallery.classList.remove('hide')
+}
+
+function showEditor() {
+  const elEditor = document.querySelector('.meme-editor')
+  elEditor.classList.remove('hide')
+}
+
+function hideEditor() {
+  const elEditor = document.querySelector('.meme-editor')
+  elEditor.classList.add('hide')
+}
+
+function resetGallery(show) {
+  if (show === 'showSaved') renderSavedMemes()
+  else renderGallery()
+  showGallery()
+  hideEditor()
+  toggleMenu()
 }
