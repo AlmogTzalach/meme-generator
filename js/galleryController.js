@@ -1,68 +1,33 @@
 'use strict'
 
-var gKeywordSearchCountMap = { funny: 12, cat: 16, baby: 2 }
+function onSetFilterByText(value) {
+  setFilterBy(value)
+}
 
-var gImgs = [
-  { id: 1, url: 'images/meme-imgs (square)/1.jpg', keywords: ['funny', 'cat'] },
-  { id: 2, url: 'images/meme-imgs (square)/2.jpg', keywords: ['funny', 'cat'] },
-  { id: 3, url: 'images/meme-imgs (square)/3.jpg', keywords: ['funny', 'cat'] },
-  { id: 4, url: 'images/meme-imgs (square)/4.jpg', keywords: ['funny', 'cat'] },
-  { id: 5, url: 'images/meme-imgs (square)/5.jpg', keywords: ['funny', 'cat'] },
-  { id: 6, url: 'images/meme-imgs (square)/6.jpg', keywords: ['funny', 'cat'] },
-  { id: 7, url: 'images/meme-imgs (square)/7.jpg', keywords: ['funny', 'cat'] },
-  { id: 8, url: 'images/meme-imgs (square)/8.jpg', keywords: ['funny', 'cat'] },
-  { id: 9, url: 'images/meme-imgs (square)/9.jpg', keywords: ['funny', 'cat'] },
-  {
-    id: 10,
-    url: 'images/meme-imgs (square)/10.jpg',
-    keywords: ['funny', 'cat'],
-  },
-  {
-    id: 11,
-    url: 'images/meme-imgs (square)/11.jpg',
-    keywords: ['funny', 'cat'],
-  },
-  {
-    id: 12,
-    url: 'images/meme-imgs (square)/12.jpg',
-    keywords: ['funny', 'cat'],
-  },
-  {
-    id: 13,
-    url: 'images/meme-imgs (square)/13.jpg',
-    keywords: ['funny', 'cat'],
-  },
-  {
-    id: 14,
-    url: 'images/meme-imgs (square)/14.jpg',
-    keywords: ['funny', 'cat'],
-  },
-  {
-    id: 15,
-    url: 'images/meme-imgs (square)/15.jpg',
-    keywords: ['funny', 'cat'],
-  },
-  {
-    id: 16,
-    url: 'images/meme-imgs (square)/16.jpg',
-    keywords: ['funny', 'cat'],
-  },
-  {
-    id: 17,
-    url: 'images/meme-imgs (square)/17.jpg',
-    keywords: ['funny', 'cat'],
-  },
-  {
-    id: 18,
-    url: 'images/meme-imgs (square)/18.jpg',
-    keywords: ['funny', 'cat'],
-  },
-]
+function onSetFilterByWord(value) {
+  const SearchCountMap = getSearchCount()
+  const searchWord = value.toLowerCase()
+  if (SearchCountMap[searchWord] < 20) SearchCountMap[searchWord]++
+
+  const elInput = document.querySelector('.filter-list')
+  elInput.value = value
+  setFilterBy(value)
+  renderSearchWords()
+}
 
 function renderGallery() {
   const elGallery = document.querySelector('.gallery')
+  const filter = getFilterBy()
+  let imgs = getImgs()
+  if (filter)
+    imgs = imgs.filter((img) =>
+      img.keywords.some((word) =>
+        word.toLowerCase().includes(filter.toLowerCase())
+      )
+    )
+
   let strHTML = ''
-  gImgs.forEach(
+  imgs.forEach(
     (img) =>
       (strHTML += `<div class="meme-image">
                          <img onclick="onMemeClicked(${img.id})" src="${img.url}"/>
@@ -90,6 +55,37 @@ function renderSavedMemes() {
   elGallery.innerHTML = strHTML
 }
 
+function renderSearchWords() {
+  const elTagsHolder = document.querySelector('.tags')
+  const elMoreTags = document.querySelector('.more-tags')
+  const searchWordsMap = getSearchCount()
+  const tagNames = Object.keys(searchWordsMap)
+  let strHTML = ''
+
+  const strHTMLs = tagNames.map((tag) => {
+    let count = searchWordsMap[tag]
+    return `<a
+    href="#"
+    style="font-size:${10 + count * 1.1}px ;"
+    class="search-tag"
+    onclick="onSetFilterByWord(this.innerText)"
+    >${tag}</a
+  >`
+  })
+
+  for (let i = 0; i < 4; i++) {
+    strHTML += strHTMLs[i]
+  }
+  elTagsHolder.innerHTML = strHTML
+
+  strHTML = ''
+
+  for (let i = 4; i < strHTMLs.length; i++) {
+    strHTML += strHTMLs[i]
+  }
+  elMoreTags.innerHTML = strHTML
+}
+
 function onMemeClicked(imgId) {
   setMeme(imgId)
   getCanvas()
@@ -97,11 +93,8 @@ function onMemeClicked(imgId) {
   clearCanvas()
   renderMeme()
   hideGallery()
+  hideSearch()
   addListeners()
-}
-
-function getImages() {
-  return gImgs
 }
 
 function hideGallery() {
@@ -109,9 +102,19 @@ function hideGallery() {
   elGallery.classList.add('hide')
 }
 
+function hideSearch() {
+  const elSearchBar = document.querySelector('.search-container')
+  elSearchBar.classList.add('hidden')
+}
+
 function showGallery() {
   const elGallery = document.querySelector('.gallery')
   elGallery.classList.remove('hide')
+}
+
+function showSearch() {
+  const elSearchBar = document.querySelector('.search-container')
+  elSearchBar.classList.remove('hidden')
 }
 
 function showEditor() {
@@ -127,7 +130,26 @@ function hideEditor() {
 function resetGallery(show) {
   if (show === 'showSaved') renderSavedMemes()
   else renderGallery()
-  showGallery()
+  hideAboutSection()
   hideEditor()
+  showGallery()
+  showSearch()
   toggleMenu()
+}
+
+function onAboutClick() {
+  hideEditor()
+  hideGallery()
+  hideSearch()
+  showAboutSection()
+}
+
+function showAboutSection() {
+  const elAboutSection = document.querySelector('.about-section')
+  elAboutSection.classList.remove('hide')
+}
+
+function hideAboutSection() {
+  const elAboutSection = document.querySelector('.about-section')
+  elAboutSection.classList.add('hide')
 }

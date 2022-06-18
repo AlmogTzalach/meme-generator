@@ -18,6 +18,8 @@
 @import url(components/meme-image.css);
 @import url(components/main-search.css);
 @import url(components/editor-interface.css);
+@import url(components/snackbar.css);
+@import url(components/about-section.css);
 
 /* Setup */
 @import url(setup/vars.css);

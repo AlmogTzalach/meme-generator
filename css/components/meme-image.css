@@ -1,1 +1,14 @@
 
+.meme-image {
+  animation-name: fade-in-meme;
+  animation-duration: 0.6s;
+}
+
+@keyframes fade-in-meme {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

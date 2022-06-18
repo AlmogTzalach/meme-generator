@@ -23,10 +23,14 @@ function saveMeme() {
   savedMemes.push(currMeme)
   gSavedMemes = savedMemes
   saveMemes()
+  showSnackbar()
 }
 
 function downloadMeme(elLink) {
+  setRectColor('rgba(0,0,0,0)')
+  renderMeme()
   const imgContent = gElCanvas.toDataURL('image/jpeg')
+
   elLink.href = imgContent
 }
 
@@ -51,7 +55,7 @@ function setMeme(imgId) {
 function setLineText(elInput) {
   const meme = getMeme()
   const line = meme.lines[meme.selectedLineIdx]
-
+  if (line === undefined) return
   line.txt = elInput.value
 }
 
@@ -159,12 +163,12 @@ function setRectColor(color) {
   line.rectColor = color
 }
 
-function clearRect() {
-  const meme = getMeme()
-  const line = meme.lines[meme.selectedLineIdx]
-  const { x, y, w, h } = line.rectPos
-  gCtx.clearRect(x, y, w, h)
-}
+// function clearRect() {
+//   const meme = getMeme()
+//   const line = meme.lines[meme.selectedLineIdx]
+//   const { x, y, w, h } = line.rectPos
+//   gCtx.clearRect(x, y, w, h)
+// }
 
 function setTextInput(clickedText) {
   const elInput = document.querySelector('.text-editor')
@@ -180,35 +184,75 @@ function setTextInput(clickedText) {
 //Check if the click is inside the rectangle
 function isRectClicked(clickedPos) {
   const meme = getMeme()
-  const line = meme.lines[meme.selectedLineIdx]
-  const { x, y, w, h } = line.rectPos
-  if (
-    x > clickedPos.x ||
-    y > clickedPos.y ||
-    x + w < clickedPos.x ||
-    y + h < clickedPos.y
-  ) {
-    setRectColor('rgba(0,0,0,0)')
-    clearRect()
-    setTextInput(false)
-    renderMeme()
-    return false
-  }
-  // if (y > clickedPos.y) return false
-  // if (x + w < clickedPos.x) return false
-  // if (y + h < clickedPos.y) return false
-  setRectColor('black')
-  setTextInput(true)
-  return true
+  let isClicked = false
+  let lineToMove = null
+  // const line = meme.lines[meme.selectedLineIdx]
+  meme.lines.forEach((line, lineIdx) => {
+    const { x, y, w, h } = line.rectPos
+    if (
+      x > clickedPos.x ||
+      y > clickedPos.y ||
+      x + w < clickedPos.x ||
+      y + h < clickedPos.y
+    ) {
+      meme.selectedLineIdx = lineIdx
+      setRectColor('rgba(0,0,0,0)')
+      setTextInput(false)
+      renderMeme()
+    } else {
+      meme.selectedLineIdx = lineIdx
+      lineToMove = lineIdx
+      isClicked = true
+    }
+  })
+  meme.lines.forEach((line, lineIdx) => {
+    meme.selectedLineIdx = lineIdx
+    if (lineIdx === lineToMove) {
+      setTextInput(true)
+      setRectColor('black')
+    } else setRectColor('rgba(0,0,0,0)')
+  })
+  meme.selectedLineIdx = lineToMove
+  return isClicked
 }
+
+// //Check if the click is inside the rectangle
+// function isRectClicked(clickedPos) {
+//   const meme = getMeme()
+//   let isClicked = false
+//   let lineToMove = 0
+//   // const line = meme.lines[meme.selectedLineIdx]
+//   meme.lines.forEach((line, lineIdx) => {
+//     const { x, y, w, h } = line.rectPos
+//     if (
+//       x > clickedPos.x ||
+//       y > clickedPos.y ||
+//       x + w < clickedPos.x ||
+//       y + h < clickedPos.y
+//     ) {
+//       meme.selectedLineIdx = lineIdx
+//       setRectColor('rgba(0,0,0,0)')
+//       setTextInput(false)
+//       renderMeme()
+//     } else {
+//       lineToMove = lineIdx
+//       meme.selectedLineIdx = lineIdx
+//       setRectColor('black')
+//       setTextInput(true)
+//       isClicked = true
+//     }
+//   })
+//   meme.selectedLineIdx = lineToMove
+//   return isClicked
+// }
 
 function setRectDrag(isDrag) {
   const meme = getMeme()
   const line = meme.lines[meme.selectedLineIdx]
+  if (line === undefined) return
   line.isDrag = isDrag
 }
 
-//Move the circle in a delta, diff from the pervious pos
 function moveRect(dx, dy) {
   const meme = getMeme()
   const line = meme.lines[meme.selectedLineIdx]

@@ -34,3 +34,7 @@ img {
 canvas:hover {
 cursor: grab;
 }
+
+button {
+  cursor: pointer;
+}

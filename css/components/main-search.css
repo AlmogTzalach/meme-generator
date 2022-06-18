@@ -4,6 +4,34 @@
 
 .main-search {
   background-color: var(--clr2);
-  padding: 1.5rem;
+  padding: 1.7rem;
   margin-bottom: 1.5rem;
+  flex-direction: column;
+}
+
+.main-search input {
+  margin-top: 00.3rem;
+}
+
+.search-tag {
+  padding: 0.3rem;
+  text-transform: capitalize;
+}
+
+.more-tags {
+  padding: 0.5rem;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.tags {
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.tags, .more-tags {
+  text-align: center;
+}
+
+.tags-container {
+  flex-direction: column;
+  padding: 1.2rem;
 }

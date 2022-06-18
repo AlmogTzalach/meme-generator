@@ -77,8 +77,8 @@ function clearCanvas() {
 
 function renderMeme() {
   const meme = getMeme()
-  const imgs = getImages()
-  // gCtx.clearRect(0, 0, 500, 500)
+  const imgs = getImgs()
+  // gCtx.clearRect(0, 0, 500, 500)s
   const img = new Image()
   img.onload = () => {
     if (document.body.clientWidth < 640) {
@@ -96,8 +96,10 @@ function renderMeme() {
 
     gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
     meme.lines.forEach((line) => {
+      if (document.body.clientWidth < 640) line.linePos.x = 150
       const { x, y } = line.linePos
       gCtx.textAlign = line.align
+      if (document.body.clientWidth < 640) line.size = 15
       gCtx.font = line.size + 'px ' + line.font
       gCtx.fillStyle = line.color
       const txtWidth = gCtx.measureText(line.txt).width
@@ -122,12 +124,8 @@ function renderMeme() {
 
 function renderRect() {
   const meme = getMeme()
-  const imgs = getImages()
   const line = meme.lines[meme.selectedLineIdx]
-  const currImg = imgs.find((img) => {
-    if (img.id === meme.selectedImgId) return img
-  })
-
+  if (line === undefined) return
   const { x, y, w, h } = line.rectPos
   gCtx.strokeStyle = line.rectColor
   gCtx.strokeRect(x, y, w, h)
@@ -183,6 +181,7 @@ function onDown(ev) {
 function onMove(ev) {
   const meme = getMeme()
   const line = meme.lines[meme.selectedLineIdx]
+  if (line === undefined) return
   if (line.isDrag) {
     const pos = getEvPos(ev)
     //Calc the delta , the diff we moved
