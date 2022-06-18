@@ -1,15 +1,15 @@
 @font-face {
     font-family: pacifico;
-    src: url(../fonts/Pacifico-Regular.ttf);
+    src: url(../../fonts/Pacifico-Regular.ttf);
 }
 
 @font-face {
     font-family: lobster;
-    src: url(../fonts/Lobster-Regular.ttf);
+    src: url(../../fonts/Lobster-Regular.ttf);
 }
 
 @font-face {
     font-family: shadowIntoLight;
-    src: url(../fonts/ShadowsIntoLight-Regular.ttf);
+    src: url(../../fonts/ShadowsIntoLight-Regular.ttf);
 }
 
