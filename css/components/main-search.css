@@ -1,9 +1,9 @@
 .search-container {
-  background-color: var(--clr2);
+  background-color: var(--clr3);
 }
 
 .main-search {
-  background-color: var(--clr2);
+  background-color: var(--clr3);
   padding: 1.7rem;
   margin-bottom: 1.5rem;
   flex-direction: column;
@@ -14,24 +14,44 @@
 }
 
 .search-tag {
-  padding: 0.3rem;
+  padding: 0.4rem;
   text-transform: capitalize;
+  font-family: shadowIntoLight;
 }
 
 .more-tags {
   padding: 0.5rem;
   grid-template-columns: 1fr 1fr 1fr;
+  transition: 0.5s;
 }
 
 .tags {
   grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 
-.tags, .more-tags {
+.tags,
+.more-tags {
   text-align: center;
 }
 
 .tags-container {
   flex-direction: column;
   padding: 1.2rem;
+}
+
+.more-tags-btn {
+  transition: 0.5s;
+}
+
+.rotate {
+  transform: rotate(180deg);
+}
+
+.open {
+  transform: scale(1);
+}
+
+.close {
+  transform: scale(0);
+  height: 0;
 }

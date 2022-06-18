@@ -66,7 +66,7 @@ function renderSearchWords() {
     let count = searchWordsMap[tag]
     return `<a
     href="#"
-    style="font-size:${10 + count * 1.1}px ;"
+    style="font-size:${15 + count * 1.2}px ;"
     class="search-tag"
     onclick="onSetFilterByWord(this.innerText)"
     >${tag}</a
@@ -104,7 +104,7 @@ function hideGallery() {
 
 function hideSearch() {
   const elSearchBar = document.querySelector('.search-container')
-  elSearchBar.classList.add('hidden')
+  elSearchBar.classList.add('hide')
 }
 
 function showGallery() {
@@ -114,7 +114,7 @@ function showGallery() {
 
 function showSearch() {
   const elSearchBar = document.querySelector('.search-container')
-  elSearchBar.classList.remove('hidden')
+  elSearchBar.classList.remove('hide')
 }
 
 function showEditor() {
@@ -128,12 +128,16 @@ function hideEditor() {
 }
 
 function resetGallery(show) {
-  if (show === 'showSaved') renderSavedMemes()
-  else renderGallery()
+  if (show === 'showSaved') {
+    renderSavedMemes()
+    hideSearch()
+  } else {
+    renderGallery()
+    showSearch()
+  }
   hideAboutSection()
   hideEditor()
   showGallery()
-  showSearch()
   toggleMenu()
 }
 

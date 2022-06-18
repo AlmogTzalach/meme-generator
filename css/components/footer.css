@@ -18,3 +18,7 @@
 .socials-container {
   margin-bottom: 4.5625rem;
 }
+
+span a {
+  text-decoration: underline;
+}

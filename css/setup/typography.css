@@ -1,9 +1,15 @@
 @font-face {
-    font-family: eurofurence;
-    src: url(/fonts/Eurofurence/Eurofurence.ttf);
+    font-family: pacifico;
+    src: url(/fonts/Pacifico-Regular.ttf);
 }
 
 @font-face {
-    font-family: lato;
-    src: url(/fonts/Lato/Lato-Regular.ttf);
+    font-family: lobster;
+    src: url(/fonts/Lobster-Regular.ttf);
 }
+
+@font-face {
+    font-family: shadowIntoLight;
+    src: url(/fonts/ShadowsIntoLight-Regular.ttf);
+}
+

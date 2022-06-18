@@ -3,9 +3,16 @@
   padding: 0;
 }
 
-.logo {
+/* .logo {
   width: 30%;
   padding: 0.8rem;
+} */
+
+.logo {
+  font-family: pacifico;
+  color: var(--clr2);
+  font-size: 2rem;
+  padding: 1.5rem;
 }
 
 .header-container {

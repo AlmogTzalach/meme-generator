@@ -5,7 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="css/styles.css" />
-    <title>MEMEGEN</title>
+    <link rel="icon" type="image/x-icon" href="/images/favicon.png" />
+    <title>MeMers</title>
   </head>
   <body onload="onInit()">
     <div class="main-screen" onclick="toggleMenu()"></div>
@@ -13,8 +14,9 @@
     <div class="page-container">
       <section class="header-container">
         <header class="main-header main-layout flex space-between">
-          <div class="logo flex align-center">
-            <img src="images/LOGO.png" />
+          <div class="flex align-center">
+            <!-- <img src="images/LOGO.png" /> -->
+            <h1 class="logo">MeMers</h1>
           </div>
           <div class="dropdown">
             <div class="menu-toggle" onclick="toggleMenu()">
@@ -53,28 +55,12 @@
           </datalist>
           <div class="tags-container flex align-center">
             <div class="tags grid"></div>
-            <div class="more-tags hide"></div>
+            <div class="more-tags grid close"></div>
           </div>
-          <button onclick="toggleMoreTags(this)">More Tags</button>
+          <div class="more-tags-btn" onclick="toggleMoreTags(this)">
+            <span>&downarrow;</span>
+          </div>
         </section>
-      </section>
-
-      <section class="main-layout about-container align-center">
-        <div class="about-section flex align-center hide">
-          <h2 class="about-title">Hello Everyone!</h2>
-          <img class="about-img" src="images/about-img.jpeg" />
-          <p class="about-text">
-            I made this little project for my full-stack course.
-            <br />
-            Hope you can appreciate the time and effort that were put into this
-            project.
-            <br />
-            Enjoy making some funny memes!
-            <br />
-            <br>
-            Your's Truly, Almog
-          </p>
-        </div>
       </section>
 
       <section class="main-content main-layout flex">
@@ -166,11 +152,29 @@
 
         <div class="grid-container grid gallery"></div>
       </section>
-
+      <section class="main-layout about-container align-center">
+        <div class="about-section flex align-center hide">
+          <h2 class="about-title">Hello Everyone!</h2>
+          <img class="about-img" src="images/about-img.jpeg" />
+          <p class="about-text">
+            I made this little project for my full-stack course.
+            <br />
+            Hope you can appreciate the time and effort that were put into this
+            project.
+            <br />
+            Enjoy making some funny memes!
+            <br />
+            <br />
+            Your's Truly, Almog
+          </p>
+        </div>
+      </section>
+      
       <section class="footer-container">
         <footer class="main-footer main-layout flex align-center">
-          <div class="logo flex align-center">
-            <img src="images/LOGO.png" />
+          <div class="flex align-center">
+            <!-- <img src="images/LOGO.png" /> -->
+            <h1 class="logo">MeMers</h1>
           </div>
           <span class="small">
             Made by Almog Tzalach for

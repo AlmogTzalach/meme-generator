@@ -27,8 +27,8 @@ function showSnackbar() {
 
 function toggleMoreTags(elBtn) {
   const elMoreTags = document.querySelector('.more-tags')
-  elMoreTags.classList.toggle('hide')
-  elMoreTags.classList.toggle('grid')
-  if (elBtn.innerText === 'More Tags') elBtn.innerText = 'Close'
-  else elBtn.innerText = 'More Tags'
+  elMoreTags.classList.toggle('open')
+  elMoreTags.classList.toggle('close')
+  // elMoreTags.classList.toggle('grid')
+  elBtn.classList.toggle('rotate')
 }

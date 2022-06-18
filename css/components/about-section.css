@@ -4,6 +4,7 @@
 
 .about-container {
   flex-direction: column;
+  padding: 5rem;
 }
 
 .about-img {
@@ -21,4 +22,5 @@
     padding: 1rem;
     font-size: 1.3rem;
     line-height: 2rem;
+    margin-bottom: 3rem;
 }
