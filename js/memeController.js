@@ -99,8 +99,8 @@ function renderMeme() {
   const img = new Image()
   img.onload = () => {
     if (document.body.clientWidth < 640) {
-      gElCanvas.width = 300
-      gElCanvas.height = (img.height * 300) / img.width
+      gElCanvas.width = 350
+      gElCanvas.height = (img.height * 350) / img.width
     }
     if (document.body.clientWidth > 840) {
       gElCanvas.width = 400
@@ -113,10 +113,8 @@ function renderMeme() {
 
     gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
     meme.lines.forEach((line) => {
-      if (document.body.clientWidth < 640) line.linePos.x = 150
       const { x, y } = line.linePos
       gCtx.textAlign = line.align
-      if (document.body.clientWidth < 640) line.size = 15
       gCtx.font = line.size + 'px ' + line.font
       gCtx.fillStyle = line.color
       const txtWidth = gCtx.measureText(line.txt).width
