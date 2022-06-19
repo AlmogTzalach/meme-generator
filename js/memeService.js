@@ -27,10 +27,7 @@ function saveMeme() {
 }
 
 function downloadMeme(elLink) {
-  setRectColor('rgba(0,0,0,0)')
-  renderMeme()
   const imgContent = gElCanvas.toDataURL('image/jpeg')
-
   elLink.href = imgContent
 }
 

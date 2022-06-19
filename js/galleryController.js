@@ -146,14 +146,15 @@ function onAboutClick() {
   hideGallery()
   hideSearch()
   showAboutSection()
+  toggleMenu()
 }
 
 function showAboutSection() {
-  const elAboutSection = document.querySelector('.about-section')
+  const elAboutSection = document.querySelector('.about-container')
   elAboutSection.classList.remove('hide')
 }
 
 function hideAboutSection() {
-  const elAboutSection = document.querySelector('.about-section')
+  const elAboutSection = document.querySelector('.about-container')
   elAboutSection.classList.add('hide')
 }

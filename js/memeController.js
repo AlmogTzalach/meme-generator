@@ -8,6 +8,23 @@ var gStartPos
 
 const gTouchEvs = ['touchstart', 'touchmove', 'touchend']
 
+function openModal() {
+  document.querySelector('.modal').style.display = 'flex'
+  document.body.classList.toggle('screen-open')
+}
+
+function closeModal() {
+  document.querySelector('.modal').style.display = 'none'
+  document.body.classList.toggle('screen-open')
+}
+
+function onShareMeme() {
+  setRectColor('rgba(0,0,0,0)')
+  renderMeme()
+  uploadImg()
+  openModal()
+}
+
 function onTextTyped(elInput) {
   setLineText(elInput)
   renderMeme()

@@ -32,3 +32,13 @@ function toggleMoreTags(elBtn) {
   // elMoreTags.classList.toggle('grid')
   elBtn.classList.toggle('rotate')
 }
+
+function toggleScreen() {
+  document.body.classList.toggle('screen-open')
+  document.querySelector('.modal').style.display = 'none'
+  const elNav = document.querySelector('.main-nav')
+  if (elNav.classList.contains('show')) {
+    document.querySelector('.main-nav').classList.toggle('show')
+    document.querySelector('.menu-toggle').classList.toggle('change')
+  }
+}

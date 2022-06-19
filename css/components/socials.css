@@ -6,7 +6,18 @@
   height: 2.5rem;
   text-align: center;
   text-decoration: none;
-  background-color: var(--clr11);
+  background-color: var(--clr4);
+  color: white;
+}
+
+.fa-solid {
+  padding: 0.8rem;
+  font-size: 1rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  text-align: center;
+  text-decoration: none;
+  background-color: var(--clr4);
   color: white;
 }
 
@@ -17,17 +28,12 @@
   background: #3b5998;
 }
 
-/* Twitter */
-.fa-twitter:hover {
-  background: #55acee;
+/* Whatsapp */
+.fa-whatsapp:hover {
+  background: #3b9847;
 }
 
-/* Behance */
-.fa-behance:hover {
-  background: black;
+.fa-folder-open:hover {
+  background: var(--clr3);
 }
 
-/* Dribbble */
-.fa-dribbble:hover {
-  background: #ea4c89;
-}

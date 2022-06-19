@@ -6,10 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="css/styles.css" />
     <link rel="icon" type="image/x-icon" href="images/favicon.png" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
     <title>MeMers</title>
   </head>
   <body onload="onInit()">
-    <div class="main-screen" onclick="toggleMenu()"></div>
+    <div class="main-screen" onclick="toggleScreen()"></div>
 
     <div class="page-container">
       <section class="header-container">
@@ -111,6 +115,8 @@
               <select name="font-select" onchange="onSelectFont(this.value)">
                 <option value="Impact">Impact</option>
                 <option value="Arial">Arial</option>
+                <option value="pacifico">Pacifico</option>
+                <option value="Verdana">Verdana</option>
               </select>
 
               <div class="editor-btn flex space-between align-center">
@@ -138,21 +144,15 @@
 
             <div class="btns-container flex space-between">
               <button class="editor-btn" onclick="onSaveMeme()">Save</button>
-              <a
-                href="#"
-                class="editor-btn"
-                onclick="onDownloadMeme(this)"
-                download="my-meme.jpg"
-                >Download</a
-              >
+              <button class="editor-btn" onclick="onShareMeme()">Share</button>
             </div>
           </div>
         </div>
 
         <div class="grid-container grid gallery"></div>
       </section>
-      <section class="main-layout about-container align-center">
-        <div class="about-section flex align-center hide">
+      <section class="main-layout about-container align-center hide">
+        <div class="about-section flex align-center">
           <h2 class="about-title">Hello Everyone!</h2>
           <img class="about-img" src="images/about-img.jpeg" />
           <p class="about-text">
@@ -168,11 +168,10 @@
           </p>
         </div>
       </section>
-      
+
       <section class="footer-container">
         <footer class="main-footer main-layout flex align-center">
           <div class="flex align-center">
-            <!-- <img src="images/LOGO.png" /> -->
             <h1 class="logo">MeMers</h1>
           </div>
           <span class="small">
@@ -183,8 +182,27 @@
       </section>
     </div>
 
+    <div class="modal align-center">
+      <span class="cancel-btn" onclick="closeModal()">X</span>
+      <div class="modal-content">
+        <h2 class="modal-title">Share your meme</h2>
+        <hr />
+        <div class="modal-btns">
+          <a href="#" target="_blank" title="Share on Facebook" class="fa fa-facebook"></a>
+          <a href="#" onclick="shareCanvas()" class="fa fa-whatsapp"></a>
+          <a
+            href="#"
+            class="fa fa-folder-open"
+            onclick="onDownloadMeme(this)"
+            download="my-meme.jpg"
+          ></a>
+        </div>
+      </div>
+    </div>
+
     <div class="snackbar">Meme Saved</div>
 
+    <script src="js/uploadService.js"></script>
     <script src="js/galleryService.js"></script>
     <script src="js/memeService.js"></script>
     <script src="js/storageService.js"></script>

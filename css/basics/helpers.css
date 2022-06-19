@@ -29,6 +29,10 @@
   display: none;
 }
 
+.show {
+  display: block;
+}
+
 .hidden {
   visibility: hidden;
 }
