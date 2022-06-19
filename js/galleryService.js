@@ -135,6 +135,56 @@ var gImgs = [
     url: 'images/meme-imgs/25.jpg',
     keywords: ['funny', 'question', 'Oprah'],
   },
+  {
+    id: 26,
+    url: 'images/meme-imgs/26.jpg',
+    keywords: ['funny'],
+  },
+  {
+    id: 27,
+    url: 'images/meme-imgs/27.jpg',
+    keywords: ['funny', 'weird'],
+  },
+  {
+    id: 28,
+    url: 'images/meme-imgs/28.jpg',
+    keywords: ['funny', 'question'],
+  },
+  {
+    id: 29,
+    url: 'images/meme-imgs/29.jpg',
+    keywords: ['funny', 'cute'],
+  },
+  {
+    id: 30,
+    url: 'images/meme-imgs/30.jpg',
+    keywords: ['funny', 'question', 'cute'],
+  },
+  {
+    id: 31,
+    url: 'images/meme-imgs/31.jpg',
+    keywords: ['funny', 'question'],
+  },
+  {
+    id: 32,
+    url: 'images/meme-imgs/32.jpg',
+    keywords: ['funny', 'question', 'cute'],
+  },
+  {
+    id: 33,
+    url: 'images/meme-imgs/33.jpg',
+    keywords: ['weird', 'question'],
+  },
+  {
+    id: 34,
+    url: 'images/meme-imgs/34.jpg',
+    keywords: ['funny'],
+  },
+  {
+    id: 35,
+    url: 'images/meme-imgs/35.jpg',
+    keywords: ['funny', 'cute'],
+  },
 ]
 
 function setFilterBy(value) {
